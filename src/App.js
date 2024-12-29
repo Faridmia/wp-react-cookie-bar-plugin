@@ -1,6 +1,5 @@
 import React from 'react';
 import CookiePlugin from './components/CookiePlugin';
-import Settings from './components/Settings';
 
 function App() {
 

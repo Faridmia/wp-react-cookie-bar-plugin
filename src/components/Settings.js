@@ -9,12 +9,11 @@ const Settings = () => {
     const [ smartcb_banner_decline_btn, SetDeclineBtn ] = useState( '' );
     const [ loader, setLoader ] = useState( 'Save Settings' );
 
-    const url = `${appCookie.apiUrl}/smartcb/v1/settings`;
+    const url = `${appCookie.apiUrl}smartcb/v1/settings`;
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoader( 'Saving...' );
-
         axios.post( url, {
             smartcb_banner_title: smartcb_banner_title,
             smartcb_banner_desc: smartcb_banner_desc,
@@ -33,12 +32,7 @@ const Settings = () => {
 
     useEffect(() => {
         // Load initial settings with GET request
-        axios.get(url, {
-            headers: {
-                'content-type': 'application/json',
-                'X-WP-Nonce': appCookie.nonce  // Include nonce for GET requests if necessary
-            }
-        })
+        axios.get(url)
         .then((res) => {
             setBannerTitle(res.data.smartcb_banner_title);
             setBannerDesc(res.data.smartcb_banner_desc);

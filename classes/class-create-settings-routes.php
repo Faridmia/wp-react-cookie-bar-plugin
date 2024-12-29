@@ -1,15 +1,22 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly  
 /**
  * This file will create Custom Rest API End Points.
  */
-
-
 class SMARTCB_WP_React_Settings_Rest_Route {
 
     public function __construct() {
         add_action( "rest_api_init", [$this, "smartcb_create_rest_rounte"] );
     }
 
+    /**
+     * Registers REST API routes for the SmartCB plugin.
+     *
+     * - POST /smartcb/v1/settings: Save settings (requires 'manage_options').
+     * - GET /smartcb/v1/settings: Retrieve settings (public access).
+     *
+     * @return void
+     */
     function smartcb_create_rest_rounte() {
 
         register_rest_route( 'smartcb/v1', '/settings', array(
@@ -29,7 +36,13 @@ class SMARTCB_WP_React_Settings_Rest_Route {
         ) );
     }
 
-    // Callback for saving settings
+    /**
+     * Saves SmartCB banner settings via REST API.
+     *
+     * @param WP_REST_Request $request The REST API request object.
+     *
+     * @return WP_REST_Response The response indicating success or failure.
+     */
     function smartcb_save_settings( WP_REST_Request $request ) {
         $params = $request->get_json_params();
 
@@ -42,7 +55,11 @@ class SMARTCB_WP_React_Settings_Rest_Route {
         return new WP_REST_Response( [ 'success' => true ], 200 );
     }
 
-    // Callback for getting settings
+    /**
+     * Retrieves SmartCB banner settings via REST API.
+     *
+     * @return WP_REST_Response The response containing the banner settings.
+     */
     function smartcb_get_settings() {
         return new WP_REST_Response( [
             'smartcb_banner_title'     => get_option( 'smartcb_banner_title', '' ),
