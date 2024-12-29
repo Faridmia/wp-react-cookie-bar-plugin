@@ -1,2 +1,3 @@
-# wp-react-kickoff
+# smartcookiebar
+
 A React JS WordPress Plugin Starter
